@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:one_mile_chat/screens/homePage.dart';
 
 import '../consts.dart';
 
@@ -67,6 +68,7 @@ class _SignInState extends State<SignIn> {
               onPressed: () {
                 print('hola');
                 controller.clear();
+                Navigator.pushNamed(context, MyChatScreen.id);
               },
               child: Text(
                 'Sign In',

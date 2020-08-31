@@ -15,42 +15,6 @@ class TopPage extends StatelessWidget {
         color: Colors.blue,
       ),
       height: height * 0.5,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          Icon(Icons.home),
-          Center(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                RawMaterialButton(
-                  onPressed: () {
-                    print('signIn clicked');
-                  },
-                  child: Text(
-                    'Sign In',
-                    style: TextStyle(
-                      fontSize: 50,
-                    ),
-                  ),
-                ),
-                RawMaterialButton(
-                  onPressed: () {
-                    print('signUp clicked');
-                  },
-                  child: Text(
-                    'Sign Up',
-                    style: TextStyle(
-                      fontSize: 19,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
     );
   }
 }

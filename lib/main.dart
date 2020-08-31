@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:one_mile_chat/screens/homePage.dart';
 
 import 'screens/StartPage.dart';
 
@@ -14,7 +15,11 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: StartPage(),
+      initialRoute: StartPage.id,
+      routes: {
+        StartPage.id: (context) => StartPage(),
+        MyChatScreen.id: (context) => MyChatScreen(),
+      },
     );
   }
 }
