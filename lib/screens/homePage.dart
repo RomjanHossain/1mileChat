@@ -10,42 +10,74 @@ class _MyChatScreenState extends State<MyChatScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        // leading: Icon(
+        //   Icons.book,
+        //   color: Colors.transparent,
+        // ),
+        title: Text(
+          'holy',
+          style: TextStyle(
+            fontSize: 35,
+            fontWeight: FontWeight.w300,
+          ),
+        ),
+        centerTitle: true,
+        actions: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Icon(Icons.contact_phone),
+          ),
+          Icon(Icons.location_city),
+        ],
+      ),
       body: SafeArea(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text('holy'),
-            // bottomBar(),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.center,
+            //   children: [
+            //     Expanded(
+            //       flex: 8,
+            //       child: Center(
+            //         child: Text(
+            //           'holy',
+            //           style: TextStyle(
+            //             fontSize: 35,
+            //             fontWeight: FontWeight.w300,
+            //           ),
+            //         ),
+            //       ),
+            //     ),
+            //     Expanded(
+            //       child: Icon(Icons.contact_phone),
+            //     ),
+            //     Expanded(
+            //       child: Icon(Icons.location_city),
+            //     ),
+            //   ],
+            // ),
+            Text(
+              'holy',
+              style: TextStyle(
+                fontSize: 35,
+                fontWeight: FontWeight.w300,
+              ),
+            ),
+            bottomBar(),
           ],
         ),
       ),
-      bottomNavigationBar: BottomAppBar(
-        clipBehavior: Clip.none,
-        color: Color(0xFF2D2F44),
-        shape: CircularNotchedRectangle(),
-        child: Container(
-          height: 50,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              Icon(
-                Icons.message,
-                color: Colors.red,
-              ),
-              Icon(Icons.notifications),
-              Icon(Icons.people),
-              Icon(Icons.settings),
-            ],
-          ),
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.only(bottom: 40),
+        child: FloatingActionButton(
+          onPressed: () {
+            print('btn clicked');
+          },
+          child: Icon(Icons.location_on),
         ),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: FloatingActionButton(
-          onPressed: () {},
-          child: Icon(
-            Icons.location_on,
-          )),
     );
   }
 }
@@ -81,10 +113,6 @@ class bottomBar extends StatelessWidget {
           ),
           Icon(
             Icons.person,
-            color: Colors.white,
-          ),
-          Icon(
-            Icons.settings,
             color: Colors.white,
           ),
         ],
