@@ -16,6 +16,7 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
         appBarTheme: AppBarTheme(
           color: Colors.white,
+          elevation: 1,
         ),
       ),
       initialRoute: StartPage.id,

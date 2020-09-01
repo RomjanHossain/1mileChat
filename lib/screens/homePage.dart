@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:one_mile_chat/Widgets/bottomBar.dart';
+import 'package:one_mile_chat/Widgets/searchBar.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 
 class MyChatScreen extends StatefulWidget {
   static const String id = 'chatScreen';
@@ -8,6 +12,8 @@ class MyChatScreen extends StatefulWidget {
 }
 
 class _MyChatScreenState extends State<MyChatScreen> {
+  final List<String> entries = <String>['A', 'B', 'C'];
+  final List<int> colorCodes = <int>[600, 500, 100];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,73 +58,55 @@ class _MyChatScreenState extends State<MyChatScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
-              'holy',
-              style: TextStyle(
-                fontSize: 35,
-                fontWeight: FontWeight.w300,
+            Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: 20,
+              ),
+              child: searchBar(),
+            ),
+            Expanded(
+              child: AnimationLimiter(
+                child: ListView.builder(
+                  itemCount: 100,
+                  itemBuilder: (BuildContext context, int index) {
+                    return AnimationConfiguration.staggeredList(
+                      position: index,
+                      duration: Duration(milliseconds: 375),
+                      child: SlideAnimation(
+                        verticalOffset: 50.0,
+                        child: FadeInAnimation(
+                          child: Card(
+                            child: ListTile(
+                              leading: CircleAvatar(
+                                backgroundImage: AssetImage('images/rick.png'),
+                                radius: 30,
+                              ),
+                              title: Text('Erick Cartman'),
+                              subtitle: Text('screw you guys, I\'m goin home'),
+                              trailing: FaIcon(FontAwesomeIcons.addressBook),
+                            ),
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                ),
               ),
             ),
-            bottomBar(),
           ],
         ),
       ),
-      floatingActionButton: Padding(
-        padding: const EdgeInsets.only(bottom: 40),
-        child: FloatingActionButton(
-          onPressed: () {
-            print('btn clicked');
-          },
-          child: Icon(Icons.location_on),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.white,
+        onPressed: () {
+          print('btn clicked');
+        },
+        child: FaIcon(
+          FontAwesomeIcons.locationArrow,
+          color: Colors.blue,
         ),
       ),
-    );
-  }
-}
-
-// ignore: camel_case_types
-class bottomBar extends StatelessWidget {
-  const bottomBar({
-    Key key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 50,
-      width: MediaQuery.of(context).size.width,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey,
-            offset: Offset(0, 0),
-            blurRadius: 10,
-            // spreadRadius: 40.0,
-          )
-        ],
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(30),
-          topRight: Radius.circular(30),
-        ),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          Icon(
-            Icons.message,
-            color: Colors.blue,
-          ),
-          Icon(
-            Icons.notifications,
-            color: Colors.black,
-          ),
-          Icon(
-            Icons.person,
-            color: Colors.black,
-          ),
-        ],
-      ),
+      bottomNavigationBar: bottomBar(),
     );
   }
 }
