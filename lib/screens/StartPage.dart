@@ -9,6 +9,7 @@ class StartPage extends StatefulWidget {
 }
 
 class _StartPageState extends State<StartPage> {
+  bool isClicked = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,13 +27,23 @@ class _StartPageState extends State<StartPage> {
             child: RawMaterialButton(
               onPressed: () {
                 print('signIn clicked');
+                setState(() {
+                  isClicked = true;
+                });
               },
-              child: Text(
-                'Sign In',
-                style: TextStyle(
-                  fontSize: 50,
-                ),
-              ),
+              child: isClicked
+                  ? Text(
+                      'Sign In',
+                      style: TextStyle(
+                        fontSize: 50,
+                      ),
+                    )
+                  : Text(
+                      'Sign Up',
+                      style: TextStyle(
+                        fontSize: 50,
+                      ),
+                    ),
             ),
           ),
           Positioned(
@@ -41,19 +52,28 @@ class _StartPageState extends State<StartPage> {
             child: RawMaterialButton(
               onPressed: () {
                 print('signIn clicked');
-                
+                setState(() {
+                  isClicked = false;
+                });
               },
-              child: Text(
-                'Sign Un',
-                style: TextStyle(
-                  fontSize: 16,
-                ),
-              ),
+              child: isClicked
+                  ? Text(
+                      'Sign Up',
+                      style: TextStyle(
+                        fontSize: 16,
+                      ),
+                    )
+                  : Text(
+                      'Sign In',
+                      style: TextStyle(
+                        fontSize: 16,
+                      ),
+                    ),
             ),
           ),
           Align(
             alignment: Alignment(0, 0.6),
-            child: SignIn(),
+            child: isClicked ? SignIn() : SignUp(),
           ),
         ],
       ),

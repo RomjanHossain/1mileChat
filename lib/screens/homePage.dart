@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class MyChatScreen extends StatefulWidget {
   static const String id = 'chatScreen';
@@ -11,53 +12,46 @@ class _MyChatScreenState extends State<MyChatScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        // leading: Icon(
-        //   Icons.book,
-        //   color: Colors.transparent,
-        // ),
+        leading: Icon(
+          Icons.book,
+          color: Colors.transparent,
+        ),
         title: Text(
-          'holy',
+          'Chats',
           style: TextStyle(
             fontSize: 35,
             fontWeight: FontWeight.w300,
+            color: Colors.black,
           ),
         ),
         centerTitle: true,
         actions: [
           Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Icon(Icons.contact_phone),
+            padding: const EdgeInsets.symmetric(
+              horizontal: 10,
+              vertical: 15,
+            ),
+            child: FaIcon(
+              FontAwesomeIcons.addressBook,
+              color: Colors.black,
+            ),
           ),
-          Icon(Icons.location_city),
+          Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 10,
+              vertical: 15,
+            ),
+            child: FaIcon(
+              FontAwesomeIcons.cog,
+              color: Colors.black,
+            ),
+          ),
         ],
       ),
       body: SafeArea(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            // Row(
-            //   mainAxisAlignment: MainAxisAlignment.center,
-            //   children: [
-            //     Expanded(
-            //       flex: 8,
-            //       child: Center(
-            //         child: Text(
-            //           'holy',
-            //           style: TextStyle(
-            //             fontSize: 35,
-            //             fontWeight: FontWeight.w300,
-            //           ),
-            //         ),
-            //       ),
-            //     ),
-            //     Expanded(
-            //       child: Icon(Icons.contact_phone),
-            //     ),
-            //     Expanded(
-            //       child: Icon(Icons.location_city),
-            //     ),
-            //   ],
-            // ),
             Text(
               'holy',
               style: TextStyle(
@@ -94,7 +88,15 @@ class bottomBar extends StatelessWidget {
       height: 50,
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
-        color: Color(0xFF2D2F44),
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey,
+            offset: Offset(0, 0),
+            blurRadius: 10,
+            // spreadRadius: 40.0,
+          )
+        ],
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(30),
           topRight: Radius.circular(30),
@@ -109,11 +111,11 @@ class bottomBar extends StatelessWidget {
           ),
           Icon(
             Icons.notifications,
-            color: Colors.white,
+            color: Colors.black,
           ),
           Icon(
             Icons.person,
-            color: Colors.white,
+            color: Colors.black,
           ),
         ],
       ),
