@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "689882814530",
+    "firebase_url": "https://onemile-bcc01.firebaseio.com",
+    "project_id": "onemile-bcc01",
+    "storage_bucket": "onemile-bcc01.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:689882814530:android:85c563bf62dc89dfdfb5db",
+        "android_client_info": {
+          "package_name": "com.example.one_mile_chat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "689882814530-87ioiqkpi3n20gc6euuo0a4b6ignqeqi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDlS2fzF1a8zCRYz8-LMObLQj3lKihE6Lk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "689882814530-87ioiqkpi3n20gc6euuo0a4b6ignqeqi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
