@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:one_mile_chat/screens/chats.dart';
 import 'package:one_mile_chat/screens/homePage.dart';
 
 import 'screens/StartPage.dart';
@@ -23,6 +24,7 @@ class MyApp extends StatelessWidget {
       routes: {
         StartPage.id: (context) => StartPage(),
         MyChatScreen.id: (context) => MyChatScreen(),
+        ChatScreen.id: (context) => ChatScreen(),
       },
     );
   }

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:one_mile_chat/screens/homePage.dart';
 
 import '../consts.dart';
@@ -50,7 +49,11 @@ class _SignInState extends State<SignIn> {
               keyboardType: TextInputType.emailAddress,
               decoration: kTextFieldDecoration.copyWith(
                 hintText: 'Enter Email',
-                prefixIcon: FaIcon(FontAwesomeIcons.user),
+                // prefixIcon: FaIcon(FontAwesomeIcons.user),
+                prefixIcon: Icon(
+                  Icons.person,
+                  color: Colors.black,
+                ),
               ),
             ),
           ),
@@ -61,7 +64,10 @@ class _SignInState extends State<SignIn> {
               obscureText: true,
               decoration: kTextFieldDecoration.copyWith(
                 hintText: 'Enter Password',
-                prefixIcon: FaIcon(FontAwesomeIcons.lock),
+                prefixIcon: Icon(
+                  Icons.lock,
+                  color: Colors.black,
+                ),
               ),
             ),
           ),
@@ -128,7 +134,10 @@ class _SignUpState extends State<SignUp> {
               keyboardType: TextInputType.emailAddress,
               decoration: kTextFieldDecoration.copyWith(
                 hintText: 'Full Name',
-                prefixIcon: FaIcon(FontAwesomeIcons.user),
+                prefixIcon: Icon(
+                  Icons.person,
+                  color: Colors.black,
+                ),
               ),
             ),
           ),
@@ -143,7 +152,10 @@ class _SignUpState extends State<SignUp> {
               keyboardType: TextInputType.emailAddress,
               decoration: kTextFieldDecoration.copyWith(
                 hintText: 'Password',
-                prefixIcon: FaIcon(FontAwesomeIcons.lock),
+                prefixIcon: Icon(
+                  Icons.lock,
+                  color: Colors.black,
+                ),
               ),
             ),
           ),
@@ -158,7 +170,10 @@ class _SignUpState extends State<SignUp> {
               keyboardType: TextInputType.emailAddress,
               decoration: kTextFieldDecoration.copyWith(
                 hintText: 'Email',
-                prefixIcon: FaIcon(FontAwesomeIcons.mailBulk),
+                prefixIcon: Icon(
+                  Icons.mail,
+                  color: Colors.black,
+                ),
               ),
             ),
           ),
@@ -169,9 +184,9 @@ class _SignUpState extends State<SignUp> {
               obscureText: true,
               decoration: kTextFieldDecoration.copyWith(
                 hintText: 'Phone',
-                prefixIcon: FaIcon(
-                  FontAwesomeIcons.phone,
-                  textDirection: TextDirection.rtl,
+                prefixIcon: Icon(
+                  Icons.phone,
+                  color: Colors.black,
                 ),
               ),
             ),

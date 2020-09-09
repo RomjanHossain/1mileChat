@@ -4,6 +4,9 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:one_mile_chat/Widgets/bottomBar.dart';
 import 'package:one_mile_chat/Widgets/searchBar.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+import 'package:one_mile_chat/screens/chats.dart';
+
+import '../consts.dart';
 
 class MyChatScreen extends StatefulWidget {
   static const String id = 'chatScreen';
@@ -12,23 +15,20 @@ class MyChatScreen extends StatefulWidget {
 }
 
 class _MyChatScreenState extends State<MyChatScreen> {
-  final List<String> entries = <String>['A', 'B', 'C'];
-  final List<int> colorCodes = <int>[600, 500, 100];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        iconTheme: IconThemeData(
+          color: Colors.black, //change your color here
+        ),
         leading: Icon(
           Icons.book,
           color: Colors.transparent,
         ),
         title: Text(
           'Chats',
-          style: TextStyle(
-            fontSize: 35,
-            fontWeight: FontWeight.w300,
-            color: Colors.black,
-          ),
+          style: kappbarText,
         ),
         centerTitle: true,
         actions: [
@@ -39,7 +39,6 @@ class _MyChatScreenState extends State<MyChatScreen> {
             ),
             child: FaIcon(
               FontAwesomeIcons.addressBook,
-              color: Colors.black,
             ),
           ),
           Padding(
@@ -49,7 +48,6 @@ class _MyChatScreenState extends State<MyChatScreen> {
             ),
             child: FaIcon(
               FontAwesomeIcons.cog,
-              color: Colors.black,
             ),
           ),
         ],
@@ -75,17 +73,7 @@ class _MyChatScreenState extends State<MyChatScreen> {
                       child: SlideAnimation(
                         verticalOffset: 50.0,
                         child: FadeInAnimation(
-                          child: Card(
-                            child: ListTile(
-                              leading: CircleAvatar(
-                                backgroundImage: AssetImage('images/rick.png'),
-                                radius: 30,
-                              ),
-                              title: Text('Erick Cartman'),
-                              subtitle: Text('screw you guys, I\'m goin home'),
-                              trailing: FaIcon(FontAwesomeIcons.addressBook),
-                            ),
-                          ),
+                          child: CardLists(),
                         ),
                       ),
                     );
@@ -107,6 +95,43 @@ class _MyChatScreenState extends State<MyChatScreen> {
         ),
       ),
       bottomNavigationBar: bottomBar(),
+    );
+  }
+}
+
+class CardLists extends StatelessWidget {
+  const CardLists({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.pushNamed(context, ChatScreen.id);
+      },
+      child: Card(
+        margin: EdgeInsets.symmetric(
+          vertical: 10,
+          horizontal: 2,
+        ),
+        // color: Colors.pinkAccent,
+        elevation: 3,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+        child: ListTile(
+          leading: CircleAvatar(
+            backgroundImage: AssetImage('images/rick.png'),
+            radius: 30,
+          ),
+          title: Text('Erick Cartman',
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
+              )),
+          subtitle: Text('screw you guys, I\'m goin home'),
+          trailing: Text('4:20 PM'),
+        ),
+      ),
     );
   }
 }
