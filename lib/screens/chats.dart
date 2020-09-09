@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:one_mile_chat/Widgets/chatbody.dart';
 import 'package:one_mile_chat/Widgets/sendmessagebutton.dart';
 
 import '../consts.dart';
@@ -44,7 +45,7 @@ class _ChatScreenState extends State<ChatScreen> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text('What sould i do?'),
+          ChatBody(),
           sendMessage(),
         ],
       ),
@@ -74,13 +75,6 @@ class _sendMessageState extends State<sendMessage> {
           color: Colors.grey[300],
           borderRadius: BorderRadius.all(Radius.circular(50)),
         ),
-        // child: Row(
-        //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        //   children: [
-        //     TextField(),
-        //     // FloatingActionButton(onPressed: () {}),
-        //   ],
-        // ),
         child: TextField(
           decoration: kTextFieldDecoration.copyWith(
             contentPadding: EdgeInsets.only(left: 15),
@@ -95,18 +89,3 @@ class _sendMessageState extends State<sendMessage> {
     );
   }
 }
-
-/* my floating action button
-
-
-FloatingActionButton(
-          backgroundColor: Colors.greenAccent[700],
-          onPressed: () {},
-          
-          child: FaIcon(FontAwesomeIcons.telegramPlane),
-          elevation: 0,
-          mini: true,
-        ),
-      )
-
-      */

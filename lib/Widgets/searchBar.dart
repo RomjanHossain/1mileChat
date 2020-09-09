@@ -8,6 +8,7 @@ class searchBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 80,
+
       // color: Colors.blue,
       child: SearchBar(
         onSearch: null,
