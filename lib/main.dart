@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:one_mile_chat/screens/chats.dart';
 import 'package:one_mile_chat/screens/homePage.dart';
 
-import 'screens/StartPage.dart';
+import 'screens/SignUpPage.dart';
 
 void main() => runApp(MyApp());
 

@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:one_mile_chat/Widgets/TopPage.dart';
 import 'package:one_mile_chat/Widgets/signInSignUp.dart';
@@ -9,6 +10,15 @@ class StartPage extends StatefulWidget {
 }
 
 class _StartPageState extends State<StartPage> {
+  void initState() {
+    firebaseIns();
+    super.initState();
+  }
+
+  void firebaseIns() async {
+    await Firebase.initializeApp();
+  }
+
   bool isClicked = true;
   @override
   Widget build(BuildContext context) {

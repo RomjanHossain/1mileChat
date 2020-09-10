@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:one_mile_chat/screens/homePage.dart';
-
+import 'package:firebase_auth/firebase_auth.dart';
 import '../consts.dart';
 
 class SignIn extends StatefulWidget {
@@ -9,9 +9,11 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
+  final _auth = FirebaseAuth.instance;
   final _formKey = GlobalKey<FormState>();
-  // TextEditingController controller = TextEditingController();
-  // TextEditingController controller2 = TextEditingController();
+  String email;
+  String password;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -59,6 +61,11 @@ class _SignInState extends State<SignIn> {
                 },
                 // controller: controller,
                 keyboardType: TextInputType.emailAddress,
+                onChanged: (val) {
+                  setState(() {
+                    email = val;
+                  });
+                },
                 decoration: kTextFieldDecoration.copyWith(
                   hintText: 'Enter Email',
                   // prefixIcon: FaIcon(FontAwesomeIcons.user),
@@ -72,6 +79,11 @@ class _SignInState extends State<SignIn> {
             Padding(
               padding: EdgeInsets.only(left: 10, right: 10),
               child: TextFormField(
+                onChanged: (val) {
+                  setState(() {
+                    password = val;
+                  });
+                },
                 validator: (value) {
                   if (value.length < 8) {
                     return 'wrong password';
@@ -90,26 +102,31 @@ class _SignInState extends State<SignIn> {
               ),
             ),
             RawMaterialButton(
-                // color: Colors.green,
-
-                padding: EdgeInsets.only(top: 16),
-                focusColor: Colors.red,
-                onPressed: () {
-                  print('hola');
-                  // controller.clear();
-                  if (_formKey.currentState.validate()) {
-                    _formKey.currentState.save();
-                    Navigator.pushNamed(context, MyChatScreen.id);
+              padding: EdgeInsets.only(top: 16),
+              focusColor: Colors.red,
+              onPressed: () async {
+                if (_formKey.currentState.validate()) {
+                  _formKey.currentState.save();
+                  try {
+                    final oldUser = await _auth.signInWithEmailAndPassword(
+                        email: email, password: password);
+                    if (oldUser != null) {
+                      Navigator.pushNamed(context, MyChatScreen.id);
+                    }
+                  } catch (e) {
+                    print(e);
                   }
-                },
-                child: Text(
-                  'Sign In',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 30,
-                    fontWeight: FontWeight.w400,
-                  ),
-                )),
+                }
+              },
+              child: Text(
+                'Sign In',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 30,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+            ),
           ],
         ),
       ),
@@ -123,13 +140,12 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
+  final _auth = FirebaseAuth.instance;
   final _formValid = GlobalKey<FormState>();
   String _fullname;
   String _password;
   String _email;
   String _phone;
-  // TextEditingController controller = TextEditingController();
-  // TextEditingController controller2 = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -258,24 +274,33 @@ class _SignUpState extends State<SignUp> {
                 ),
                 keyboardType: TextInputType.phone,
                 onChanged: (value) {
-                  setState(() {
-                    _phone = value;
-                  });
+                  setState(
+                    () {
+                      _phone = value;
+                    },
+                  );
                 },
               ),
             ),
             // form end
             RawMaterialButton(
-              // color: Colors.green,
               padding: EdgeInsets.only(top: 16),
               focusColor: Colors.red,
-              onPressed: () {
+              onPressed: () async {
                 if (_formValid.currentState.validate()) {
                   _formValid.currentState.save();
+
+                  try {
+                    final newUser = await _auth.createUserWithEmailAndPassword(
+                        email: _email, password: _password);
+                    if (newUser != null) {
+                      Navigator.pushNamed(context, MyChatScreen.id);
+                    }
+                  } catch (e) {
+                    print('Error creating new user: $e');
+                  }
                 }
                 print('$_fullname, $_password, $_email, $_phone');
-                // controller.clear();
-                // Navigator.pushNamed(context, MyChatScreen.id);
               },
               child: Text(
                 'Sign Up',
