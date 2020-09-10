@@ -9,8 +9,8 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
-  TextEditingController controller = TextEditingController();
-  TextEditingController controller2 = TextEditingController();
+  // TextEditingController controller = TextEditingController();
+  // TextEditingController controller2 = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -45,7 +45,7 @@ class _SignInState extends State<SignIn> {
               bottom: 10,
             ),
             child: TextField(
-              controller: controller,
+              // controller: controller,
               keyboardType: TextInputType.emailAddress,
               decoration: kTextFieldDecoration.copyWith(
                 hintText: 'Enter Email',
@@ -60,7 +60,7 @@ class _SignInState extends State<SignIn> {
           Padding(
             padding: EdgeInsets.only(left: 10, right: 10),
             child: TextField(
-              controller: controller2,
+              // controller: controller2,
               obscureText: true,
               decoration: kTextFieldDecoration.copyWith(
                 hintText: 'Enter Password',
@@ -78,7 +78,7 @@ class _SignInState extends State<SignIn> {
               focusColor: Colors.red,
               onPressed: () {
                 print('hola');
-                controller.clear();
+                // controller.clear();
                 Navigator.pushNamed(context, MyChatScreen.id);
               },
               child: Text(
@@ -101,8 +101,13 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
-  TextEditingController controller = TextEditingController();
-  TextEditingController controller2 = TextEditingController();
+  final _formValid = GlobalKey<FormState>();
+  String _fullname;
+  String _password;
+  String _email;
+  String _phone;
+  // TextEditingController controller = TextEditingController();
+  // TextEditingController controller2 = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -121,6 +126,7 @@ class _SignUpState extends State<SignUp> {
       height: MediaQuery.of(context).size.width / 1,
       width: MediaQuery.of(context).size.width / 1.12,
       child: Column(
+        key: _formValid,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Padding(
@@ -130,8 +136,8 @@ class _SignUpState extends State<SignUp> {
               bottom: 10,
             ),
             child: TextField(
-              controller: controller,
-              keyboardType: TextInputType.emailAddress,
+              // controller: controller,
+              textCapitalization: TextCapitalization.words,
               decoration: kTextFieldDecoration.copyWith(
                 hintText: 'Full Name',
                 prefixIcon: Icon(
@@ -139,6 +145,12 @@ class _SignUpState extends State<SignUp> {
                   color: Colors.black,
                 ),
               ),
+
+              onChanged: (value) {
+                setState(() {
+                  _fullname = value;
+                });
+              },
             ),
           ),
           Padding(
@@ -148,8 +160,8 @@ class _SignUpState extends State<SignUp> {
               bottom: 10,
             ),
             child: TextField(
-              controller: controller,
-              keyboardType: TextInputType.emailAddress,
+              // controller: controller,
+              obscureText: true,
               decoration: kTextFieldDecoration.copyWith(
                 hintText: 'Password',
                 prefixIcon: Icon(
@@ -157,6 +169,11 @@ class _SignUpState extends State<SignUp> {
                   color: Colors.black,
                 ),
               ),
+              onChanged: (value) {
+                setState(() {
+                  _password = value;
+                });
+              },
             ),
           ),
           Padding(
@@ -166,7 +183,7 @@ class _SignUpState extends State<SignUp> {
               bottom: 10,
             ),
             child: TextField(
-              controller: controller,
+              // controller: controller,
               keyboardType: TextInputType.emailAddress,
               decoration: kTextFieldDecoration.copyWith(
                 hintText: 'Email',
@@ -175,13 +192,18 @@ class _SignUpState extends State<SignUp> {
                   color: Colors.black,
                 ),
               ),
+              onChanged: (value) {
+                setState(() {
+                  _email = value;
+                });
+              },
             ),
           ),
           Padding(
             padding: EdgeInsets.only(left: 10, right: 10),
             child: TextField(
-              controller: controller2,
-              obscureText: true,
+              // controller: controller2,
+
               decoration: kTextFieldDecoration.copyWith(
                 hintText: 'Phone',
                 prefixIcon: Icon(
@@ -189,6 +211,12 @@ class _SignUpState extends State<SignUp> {
                   color: Colors.black,
                 ),
               ),
+              keyboardType: TextInputType.phone,
+              onChanged: (value) {
+                setState(() {
+                  _phone = value;
+                });
+              },
             ),
           ),
           RawMaterialButton(
@@ -196,9 +224,12 @@ class _SignUpState extends State<SignUp> {
             padding: EdgeInsets.only(top: 16),
             focusColor: Colors.red,
             onPressed: () {
-              print('hola');
-              controller.clear();
-              Navigator.pushNamed(context, MyChatScreen.id);
+              if (_formValid.currentState.validate()) {
+                _formValid.currentState.save();
+              }
+              print('$_fullname, $_password, $_email, $_phone');
+              // controller.clear();
+              // Navigator.pushNamed(context, MyChatScreen.id);
             },
             child: Text(
               'Sign Up',
