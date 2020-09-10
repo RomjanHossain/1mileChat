@@ -9,6 +9,7 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
+  final _formKey = GlobalKey<FormState>();
   // TextEditingController controller = TextEditingController();
   // TextEditingController controller2 = TextEditingController();
   @override
@@ -28,68 +29,89 @@ class _SignInState extends State<SignIn> {
       ),
       height: MediaQuery.of(context).size.width / 1,
       width: MediaQuery.of(context).size.width / 1.12,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(bottom: 50),
-            child: CircleAvatar(
-              radius: 50,
-              backgroundImage: AssetImage('images/rick.png'),
+      child: Form(
+        key: _formKey,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(bottom: 50),
+              child: CircleAvatar(
+                radius: 50,
+                backgroundImage: AssetImage('images/rick.png'),
+              ),
             ),
-          ),
-          Padding(
-            padding: EdgeInsets.only(
-              left: 10,
-              right: 10,
-              bottom: 10,
-            ),
-            child: TextField(
-              // controller: controller,
-              keyboardType: TextInputType.emailAddress,
-              decoration: kTextFieldDecoration.copyWith(
-                hintText: 'Enter Email',
-                // prefixIcon: FaIcon(FontAwesomeIcons.user),
-                prefixIcon: Icon(
-                  Icons.person,
-                  color: Colors.black,
+            Padding(
+              padding: EdgeInsets.only(
+                left: 10,
+                right: 10,
+                bottom: 10,
+              ),
+              child: TextFormField(
+                validator: (value) {
+                  Pattern pattern =
+                      r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+                  RegExp regex = new RegExp(pattern);
+                  if (!regex.hasMatch(value))
+                    return 'Enter Valid Email';
+                  else
+                    return null;
+                },
+                // controller: controller,
+                keyboardType: TextInputType.emailAddress,
+                decoration: kTextFieldDecoration.copyWith(
+                  hintText: 'Enter Email',
+                  // prefixIcon: FaIcon(FontAwesomeIcons.user),
+                  prefixIcon: Icon(
+                    Icons.person,
+                    color: Colors.black,
+                  ),
                 ),
               ),
             ),
-          ),
-          Padding(
-            padding: EdgeInsets.only(left: 10, right: 10),
-            child: TextField(
-              // controller: controller2,
-              obscureText: true,
-              decoration: kTextFieldDecoration.copyWith(
-                hintText: 'Enter Password',
-                prefixIcon: Icon(
-                  Icons.lock,
-                  color: Colors.black,
+            Padding(
+              padding: EdgeInsets.only(left: 10, right: 10),
+              child: TextFormField(
+                validator: (value) {
+                  if (value.length < 8) {
+                    return 'wrong password';
+                  }
+                  return null;
+                },
+                // controller: controller2,
+                obscureText: true,
+                decoration: kTextFieldDecoration.copyWith(
+                  hintText: 'Enter Password',
+                  prefixIcon: Icon(
+                    Icons.lock,
+                    color: Colors.black,
+                  ),
                 ),
               ),
             ),
-          ),
-          RawMaterialButton(
-              // color: Colors.green,
+            RawMaterialButton(
+                // color: Colors.green,
 
-              padding: EdgeInsets.only(top: 16),
-              focusColor: Colors.red,
-              onPressed: () {
-                print('hola');
-                // controller.clear();
-                Navigator.pushNamed(context, MyChatScreen.id);
-              },
-              child: Text(
-                'Sign In',
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 30,
-                  fontWeight: FontWeight.w400,
-                ),
-              )),
-        ],
+                padding: EdgeInsets.only(top: 16),
+                focusColor: Colors.red,
+                onPressed: () {
+                  print('hola');
+                  // controller.clear();
+                  if (_formKey.currentState.validate()) {
+                    _formKey.currentState.save();
+                    Navigator.pushNamed(context, MyChatScreen.id);
+                  }
+                },
+                child: Text(
+                  'Sign In',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 30,
+                    fontWeight: FontWeight.w400,
+                  ),
+                )),
+          ],
+        ),
       ),
     );
   }
@@ -125,122 +147,147 @@ class _SignUpState extends State<SignUp> {
       ),
       height: MediaQuery.of(context).size.width / 1,
       width: MediaQuery.of(context).size.width / 1.12,
-      child: Column(
+      child: Form(
         key: _formValid,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Padding(
-            padding: EdgeInsets.only(
-              left: 10,
-              right: 10,
-              bottom: 10,
-            ),
-            child: TextField(
-              // controller: controller,
-              textCapitalization: TextCapitalization.words,
-              decoration: kTextFieldDecoration.copyWith(
-                hintText: 'Full Name',
-                prefixIcon: Icon(
-                  Icons.person,
-                  color: Colors.black,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Padding(
+              padding: EdgeInsets.only(
+                left: 10,
+                right: 10,
+                bottom: 10,
+              ),
+              child: TextFormField(
+                validator: (value) {
+                  if (value.length < 3)
+                    return 'Name must be more than 2 charater';
+                  else
+                    return null;
+                },
+                onChanged: (value) {
+                  setState(() {
+                    _fullname = value;
+                  });
+                },
+                textCapitalization: TextCapitalization.words,
+                decoration: kTextFieldDecoration.copyWith(
+                  hintText: 'Full Name',
+                  prefixIcon: Icon(Icons.person, color: Colors.black),
                 ),
               ),
-
-              onChanged: (value) {
-                setState(() {
-                  _fullname = value;
-                });
+            ),
+            Padding(
+              padding: EdgeInsets.only(
+                left: 10,
+                right: 10,
+                bottom: 10,
+              ),
+              child: TextFormField(
+                validator: (value) {
+                  if (value.isEmpty) {
+                    return "Password can't be empty";
+                  } else if (value.length < 8) {
+                    return "length must be 9 character";
+                  }
+                  return null;
+                },
+                obscureText: true,
+                decoration: kTextFieldDecoration.copyWith(
+                  hintText: 'Password',
+                  prefixIcon: Icon(
+                    Icons.lock,
+                    color: Colors.black,
+                  ),
+                ),
+                onChanged: (value) {
+                  setState(() {
+                    _password = value;
+                  });
+                },
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(
+                left: 10,
+                right: 10,
+                bottom: 10,
+              ),
+              child: TextFormField(
+                validator: (value) {
+                  Pattern pattern =
+                      r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+                  RegExp regex = new RegExp(pattern);
+                  if (!regex.hasMatch(value))
+                    return 'Enter Valid Email';
+                  else
+                    return null;
+                },
+                // controller: controller,
+                keyboardType: TextInputType.emailAddress,
+                decoration: kTextFieldDecoration.copyWith(
+                  hintText: 'Email',
+                  prefixIcon: Icon(
+                    Icons.mail,
+                    color: Colors.black,
+                  ),
+                ),
+                onChanged: (value) {
+                  setState(() {
+                    _email = value;
+                  });
+                },
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(left: 10, right: 10),
+              child: TextFormField(
+                // controller: controller2,
+                validator: (value) {
+                  if (value.length < 9) {
+                    return 'wrong number';
+                  }
+                  return null;
+                },
+                decoration: kTextFieldDecoration.copyWith(
+                  hintText: 'Phone',
+                  prefixIcon: Icon(
+                    Icons.phone,
+                    color: Colors.black,
+                  ),
+                ),
+                keyboardType: TextInputType.phone,
+                onChanged: (value) {
+                  setState(() {
+                    _phone = value;
+                  });
+                },
+              ),
+            ),
+            // form end
+            RawMaterialButton(
+              // color: Colors.green,
+              padding: EdgeInsets.only(top: 16),
+              focusColor: Colors.red,
+              onPressed: () {
+                if (_formValid.currentState.validate()) {
+                  _formValid.currentState.save();
+                }
+                print('$_fullname, $_password, $_email, $_phone');
+                // controller.clear();
+                // Navigator.pushNamed(context, MyChatScreen.id);
               },
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.only(
-              left: 10,
-              right: 10,
-              bottom: 10,
-            ),
-            child: TextField(
-              // controller: controller,
-              obscureText: true,
-              decoration: kTextFieldDecoration.copyWith(
-                hintText: 'Password',
-                prefixIcon: Icon(
-                  Icons.lock,
+              child: Text(
+                'Sign Up',
+                style: TextStyle(
                   color: Colors.black,
+                  fontSize: 30,
+                  fontWeight: FontWeight.w400,
                 ),
               ),
-              onChanged: (value) {
-                setState(() {
-                  _password = value;
-                });
-              },
             ),
-          ),
-          Padding(
-            padding: EdgeInsets.only(
-              left: 10,
-              right: 10,
-              bottom: 10,
-            ),
-            child: TextField(
-              // controller: controller,
-              keyboardType: TextInputType.emailAddress,
-              decoration: kTextFieldDecoration.copyWith(
-                hintText: 'Email',
-                prefixIcon: Icon(
-                  Icons.mail,
-                  color: Colors.black,
-                ),
-              ),
-              onChanged: (value) {
-                setState(() {
-                  _email = value;
-                });
-              },
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.only(left: 10, right: 10),
-            child: TextField(
-              // controller: controller2,
-
-              decoration: kTextFieldDecoration.copyWith(
-                hintText: 'Phone',
-                prefixIcon: Icon(
-                  Icons.phone,
-                  color: Colors.black,
-                ),
-              ),
-              keyboardType: TextInputType.phone,
-              onChanged: (value) {
-                setState(() {
-                  _phone = value;
-                });
-              },
-            ),
-          ),
-          RawMaterialButton(
-            // color: Colors.green,
-            padding: EdgeInsets.only(top: 16),
-            focusColor: Colors.red,
-            onPressed: () {
-              if (_formValid.currentState.validate()) {
-                _formValid.currentState.save();
-              }
-              print('$_fullname, $_password, $_email, $_phone');
-              // controller.clear();
-              // Navigator.pushNamed(context, MyChatScreen.id);
-            },
-            child: Text(
-              'Sign Up',
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 30,
-                fontWeight: FontWeight.w400,
-              ),
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
