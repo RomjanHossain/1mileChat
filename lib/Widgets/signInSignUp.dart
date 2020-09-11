@@ -17,6 +17,8 @@ class _SignInState extends State<SignIn> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: MediaQuery.of(context).size.width / 1,
+      width: MediaQuery.of(context).size.width / 1.12,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.all(Radius.circular(30)),
@@ -29,8 +31,6 @@ class _SignInState extends State<SignIn> {
           )
         ],
       ),
-      height: MediaQuery.of(context).size.width / 1,
-      width: MediaQuery.of(context).size.width / 1.12,
       child: Form(
         key: _formKey,
         child: Column(

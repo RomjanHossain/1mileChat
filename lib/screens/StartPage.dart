@@ -1,3 +1,4 @@
+import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:flutter/material.dart';
 import 'package:one_mile_chat/Widgets/signInSignUp.dart';
 
@@ -33,6 +34,7 @@ class _SignInUIState extends State<SignInUI> {
         ),
         Scaffold(
           backgroundColor: Colors.transparent,
+          resizeToAvoidBottomPadding: false,
           body: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -86,11 +88,32 @@ class _SignInUIState extends State<SignInUI> {
                   ),
                 ],
               ),
-              Padding(
-                padding: const EdgeInsets.only(
-                  top: 20,
+              Flexible(
+                flex: 5,
+                child: Padding(
+                  padding: EdgeInsets.only(
+                    top: 30,
+                  ),
+                  child: isClicked ? SignIn() : SignUp(),
                 ),
-                child: isClicked ? SignIn() : SignUp(),
+              ),
+              SingleChildScrollView(
+                child: Padding(
+                  padding: EdgeInsets.only(
+                    top: 30,
+                  ),
+                  child: isClicked
+                      ? SignInButton(
+                          Buttons.Google,
+                          text: "Sign In with Google",
+                          onPressed: () {},
+                        )
+                      : SignInButton(
+                          Buttons.Google,
+                          text: "Sign Up with Google",
+                          onPressed: () {},
+                        ),
+                ),
               ),
             ],
           ),

@@ -7,6 +7,7 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:one_mile_chat/screens/chats.dart';
 
 import '../consts.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class MyChatScreen extends StatefulWidget {
   static const String id = 'chatScreen';
@@ -15,6 +16,7 @@ class MyChatScreen extends StatefulWidget {
 }
 
 class _MyChatScreenState extends State<MyChatScreen> {
+  final _auth = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,8 +48,14 @@ class _MyChatScreenState extends State<MyChatScreen> {
               horizontal: 10,
               vertical: 15,
             ),
-            child: FaIcon(
-              FontAwesomeIcons.cog,
+            child: GestureDetector(
+              onTap: () async {
+                await _auth.signOut();
+                Navigator.pop(context);
+              },
+              child: FaIcon(
+                FontAwesomeIcons.cog,
+              ),
             ),
           ),
         ],
