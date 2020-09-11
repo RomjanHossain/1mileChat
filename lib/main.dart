@@ -3,9 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:one_mile_chat/screens/chats.dart';
 import 'package:one_mile_chat/screens/homePage.dart';
 
-import 'screens/SignUpPage.dart';
+import 'screens/StartPage.dart';
 
-void main() => runApp(MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(MyApp());
+}
 
 class MyApp extends StatefulWidget {
   @override
@@ -13,16 +17,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  @override
-  void initState() {
-    super.initState();
-    firebaseIns();
-  }
-
-  void firebaseIns() async {
-    await Firebase.initializeApp();
-  }
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
