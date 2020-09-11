@@ -1,6 +1,4 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:one_mile_chat/Widgets/TopPage.dart';
 import 'package:one_mile_chat/Widgets/signInSignUp.dart';
 
 class StartPage extends StatefulWidget {
@@ -10,83 +8,94 @@ class StartPage extends StatefulWidget {
 }
 
 class _StartPageState extends State<StartPage> {
-  void initState() {
-    firebaseIns();
-    super.initState();
+  @override
+  Widget build(BuildContext context) {
+    return SignInUI();
   }
+}
 
-  void firebaseIns() async {
-    await Firebase.initializeApp();
-  }
+class SignInUI extends StatefulWidget {
+  @override
+  _SignInUIState createState() => _SignInUIState();
+}
 
+class _SignInUIState extends State<SignInUI> {
   bool isClicked = true;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(
-        overflow: Overflow.visible,
-        children: [
-          Expanded(
-            child: TopPage(
-              height: MediaQuery.of(context).size.height,
-            ),
-          ),
-          Positioned(
-            top: 190,
-            left: 120,
-            child: RawMaterialButton(
-              onPressed: () {
-                print('signIn clicked');
-                setState(() {
-                  isClicked = true;
-                });
-              },
-              child: isClicked
-                  ? Text(
-                      'Sign In',
-                      style: TextStyle(
-                        fontSize: 50,
-                      ),
-                    )
-                  : Text(
-                      'Sign Up',
-                      style: TextStyle(
-                        fontSize: 50,
-                      ),
+    return Stack(
+      children: [
+        Image.asset(
+          'images/chatappBG.png',
+          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
+          fit: BoxFit.cover,
+        ),
+        Scaffold(
+          backgroundColor: Colors.transparent,
+          body: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(left: 80),
+                    child: RawMaterialButton(
+                      onPressed: () {
+                        print('signIn clicked');
+                        setState(() {
+                          isClicked = true;
+                        });
+                      },
+                      child: isClicked
+                          ? Text(
+                              'Sign In',
+                              style: TextStyle(
+                                fontSize: 50,
+                              ),
+                            )
+                          : Text(
+                              'Sign Up',
+                              style: TextStyle(
+                                fontSize: 50,
+                              ),
+                            ),
                     ),
-            ),
+                  ),
+                  RawMaterialButton(
+                    onPressed: () {
+                      print('signIn clicked');
+                      setState(() {
+                        isClicked = false;
+                      });
+                    },
+                    child: isClicked
+                        ? Text(
+                            'Sign Up',
+                            style: TextStyle(
+                              fontSize: 16,
+                            ),
+                          )
+                        : Text(
+                            'Sign In',
+                            style: TextStyle(
+                              fontSize: 16,
+                            ),
+                          ),
+                  ),
+                ],
+              ),
+              Padding(
+                padding: const EdgeInsets.only(
+                  top: 20,
+                ),
+                child: isClicked ? SignIn() : SignUp(),
+              ),
+            ],
           ),
-          Positioned(
-            top: 190,
-            left: 300,
-            child: RawMaterialButton(
-              onPressed: () {
-                print('signIn clicked');
-                setState(() {
-                  isClicked = false;
-                });
-              },
-              child: isClicked
-                  ? Text(
-                      'Sign Up',
-                      style: TextStyle(
-                        fontSize: 16,
-                      ),
-                    )
-                  : Text(
-                      'Sign In',
-                      style: TextStyle(
-                        fontSize: 16,
-                      ),
-                    ),
-            ),
-          ),
-          Align(
-            alignment: Alignment(0, 0.6),
-            child: isClicked ? SignIn() : SignUp(),
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

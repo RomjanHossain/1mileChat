@@ -103,7 +103,6 @@ class CardLists extends StatelessWidget {
   const CardLists({
     Key key,
   }) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
