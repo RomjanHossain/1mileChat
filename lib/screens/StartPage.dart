@@ -97,24 +97,41 @@ class _SignInUIState extends State<SignInUI> {
                   child: isClicked ? SignIn() : SignUp(),
                 ),
               ),
-              SingleChildScrollView(
-                child: Padding(
-                  padding: EdgeInsets.only(
-                    top: 30,
-                  ),
-                  child: isClicked
-                      ? SignInButton(
-                          Buttons.Google,
-                          text: "Sign In with Google",
-                          onPressed: () {},
-                        )
-                      : SignInButton(
-                          Buttons.Google,
-                          text: "Sign Up with Google",
-                          onPressed: () {},
-                        ),
+              Padding(
+                padding: EdgeInsets.only(
+                  top: 30,
                 ),
+                child: isClicked
+                    ? SignInButton(
+                        Buttons.Google,
+                        text: "Sign In with Google",
+                        onPressed: () {
+                          print('google btn clicked');
+                        },
+                      )
+                    : SignInButton(
+                        Buttons.Google,
+                        text: "Sign Up with Google",
+                        onPressed: () {
+                          print('google btn clicked');
+                        },
+                      ),
               ),
+              isClicked
+                  ? SignInButton(
+                      Buttons.FacebookNew,
+                      text: "Sign In with Facebook",
+                      onPressed: () {
+                        print('Facebook btn clicked');
+                      },
+                    )
+                  : SignInButton(
+                      Buttons.FacebookNew,
+                      text: "Sign Up with Facebook",
+                      onPressed: () {
+                        print('Facebook btn clicked');
+                      },
+                    ),
             ],
           ),
         ),

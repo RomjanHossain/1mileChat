@@ -11,6 +11,7 @@ class SignIn extends StatefulWidget {
 class _SignInState extends State<SignIn> {
   final _auth = FirebaseAuth.instance;
   final _formKey = GlobalKey<FormState>();
+
   String email;
   String password;
 
@@ -107,9 +108,11 @@ class _SignInState extends State<SignIn> {
               onPressed: () async {
                 if (_formKey.currentState.validate()) {
                   _formKey.currentState.save();
+
                   try {
                     final oldUser = await _auth.signInWithEmailAndPassword(
                         email: email, password: password);
+
                     if (oldUser != null) {
                       Navigator.pushNamed(context, MyChatScreen.id);
                     }
@@ -224,38 +227,6 @@ class _SignUpState extends State<SignUp> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(
-                left: 10,
-                right: 10,
-                bottom: 10,
-              ),
-              child: TextFormField(
-                validator: (value) {
-                  Pattern pattern =
-                      r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
-                  RegExp regex = new RegExp(pattern);
-                  if (!regex.hasMatch(value))
-                    return 'Enter Valid Email';
-                  else
-                    return null;
-                },
-                // controller: controller,
-                keyboardType: TextInputType.emailAddress,
-                decoration: kTextFieldDecoration.copyWith(
-                  hintText: 'Email',
-                  prefixIcon: Icon(
-                    Icons.mail,
-                    color: Colors.black,
-                  ),
-                ),
-                onChanged: (value) {
-                  setState(() {
-                    _email = value;
-                  });
-                },
-              ),
-            ),
-            Padding(
               padding: EdgeInsets.only(left: 10, right: 10),
               child: TextFormField(
                 // controller: controller2,
@@ -282,6 +253,38 @@ class _SignUpState extends State<SignUp> {
                 },
               ),
             ),
+            // Padding(
+            //   padding: EdgeInsets.only(
+            //     left: 10,
+            //     right: 10,
+            //     bottom: 10,
+            //   ),
+            //   child: TextFormField(
+            //     validator: (value) {
+            //       Pattern pattern =
+            //           r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+            //       RegExp regex = new RegExp(pattern);
+            //       if (!regex.hasMatch(value))
+            //         return 'Enter Valid Email';
+            //       else
+            //         return null;
+            //     },
+            //     // controller: controller,
+            //     keyboardType: TextInputType.emailAddress,
+            //     decoration: kTextFieldDecoration.copyWith(
+            //       hintText: 'Email',
+            //       prefixIcon: Icon(
+            //         Icons.mail,
+            //         color: Colors.black,
+            //       ),
+            //     ),
+            //     onChanged: (value) {
+            //       setState(() {
+            //         _email = value;
+            //       });
+            //     },
+            //   ),
+            // ),
             // form end
             RawMaterialButton(
               padding: EdgeInsets.only(top: 16),

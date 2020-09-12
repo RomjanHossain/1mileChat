@@ -8,41 +8,20 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:689882814530:android:85c563bf62dc89dfdfb5db",
-        "android_client_info": {
-          "package_name": "com.example.one_mile_chat"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "689882814530-87ioiqkpi3n20gc6euuo0a4b6ignqeqi.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyDlS2fzF1a8zCRYz8-LMObLQj3lKihE6Lk"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "689882814530-87ioiqkpi3n20gc6euuo0a4b6ignqeqi.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:689882814530:android:57d4e54fe7970e0edfb5db",
+        "mobilesdk_app_id": "1:689882814530:android:d54ca048cba4e483dfb5db",
         "android_client_info": {
           "package_name": "com.romjan1412.one_mile_chat"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "689882814530-c1a01l0niu8jat89d030lad2r4plau5j.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.romjan1412.one_mile_chat",
+            "certificate_hash": "93c46d21cae9b008e0cf68e2403d95d0990c1249"
+          }
+        },
         {
           "client_id": "689882814530-87ioiqkpi3n20gc6euuo0a4b6ignqeqi.apps.googleusercontent.com",
           "client_type": 3
