@@ -7,22 +7,30 @@ class AuthServices {
   final FirebaseFirestore _db = FirebaseFirestore.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
 
-  Future<User> get getUser => _auth.currentUser();
+  Future<User> getUser() async {
+    return _auth.currentUser;
+  }
+
   Stream<User> get user => _auth.authStateChanges();
   Future<User> googleSignIn() async {
     try {
+      // Trigger the authentication flow
       GoogleSignInAccount googleSignInAccount = await _googleSignIn.signIn();
-      GoogleSignInAuthentication googleauth =
+
+      // Obtain the auth details from the request
+      GoogleSignInAuthentication googleAuth =
           await googleSignInAccount.authentication;
-      final AuthCredential credential = GoogleAuthProvider.credential(
-        accessToken: googleauth.accessToken,
-        idToken: googleauth.idToken,
+      // Create a new credential
+      final GoogleAuthCredential credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
       );
-      User user = await _auth.signInWithCredential(credential);
-      updateUserData(user);
-      return user;
+      UserCredential userCredential =
+          await _auth.signInWithCredential(credential);
+      updateUserData(userCredential.user);
+      return userCredential.user;
     } catch (e) {
-      print('You got some error \n$e');
+      print('You got some error \n${e.toString()}');
       return null;
     }
   }
