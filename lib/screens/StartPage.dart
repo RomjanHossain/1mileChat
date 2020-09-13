@@ -9,18 +9,6 @@ class StartPage extends StatefulWidget {
 }
 
 class _StartPageState extends State<StartPage> {
-  @override
-  Widget build(BuildContext context) {
-    return SignInUI();
-  }
-}
-
-class SignInUI extends StatefulWidget {
-  @override
-  _SignInUIState createState() => _SignInUIState();
-}
-
-class _SignInUIState extends State<SignInUI> {
   bool isClicked = true;
   @override
   Widget build(BuildContext context) {
@@ -34,73 +22,83 @@ class _SignInUIState extends State<SignInUI> {
         ),
         Scaffold(
           backgroundColor: Colors.transparent,
-          resizeToAvoidBottomPadding: false,
-          body: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(left: 80),
-                    child: RawMaterialButton(
+
+          // resizeToAvoidBottomPadding: false,
+          // resizeToAvoidBottomInset: false,
+          body: SafeArea(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(left: 80),
+                      child: RawMaterialButton(
+                        onPressed: () {
+                          print('signIn clicked');
+                          setState(() {
+                            isClicked = true;
+                          });
+                        },
+                        child: isClicked
+                            ? Text(
+                                'Sign In',
+                                style: TextStyle(
+                                  fontSize: 50,
+                                ),
+                              )
+                            : Text(
+                                'Sign Up',
+                                style: TextStyle(
+                                  fontSize: 50,
+                                ),
+                              ),
+                      ),
+                    ),
+                    RawMaterialButton(
                       onPressed: () {
                         print('signIn clicked');
                         setState(() {
-                          isClicked = true;
+                          isClicked = false;
                         });
                       },
                       child: isClicked
                           ? Text(
-                              'Sign In',
+                              'Sign Up',
                               style: TextStyle(
-                                fontSize: 50,
+                                fontSize: 16,
                               ),
                             )
                           : Text(
-                              'Sign Up',
+                              'Sign In',
                               style: TextStyle(
-                                fontSize: 50,
+                                fontSize: 16,
                               ),
                             ),
                     ),
-                  ),
-                  RawMaterialButton(
-                    onPressed: () {
-                      print('signIn clicked');
-                      setState(() {
-                        isClicked = false;
-                      });
-                    },
-                    child: isClicked
-                        ? Text(
-                            'Sign Up',
-                            style: TextStyle(
-                              fontSize: 16,
-                            ),
-                          )
-                        : Text(
-                            'Sign In',
-                            style: TextStyle(
-                              fontSize: 16,
-                            ),
-                          ),
-                  ),
-                ],
-              ),
-              Flexible(
-                flex: 5,
-                child: Padding(
-                  padding: EdgeInsets.only(
-                    top: 30,
-                  ),
-                  child: isClicked ? SignIn() : SignUp(),
+                  ],
                 ),
-              ),
+                Flexible(
+                  flex: 5,
+                  child: Padding(
+                    padding: EdgeInsets.only(
+                      top: 30,
+                    ),
+                    child: isClicked ? SignIn() : SignUp(),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+        Positioned(
+          bottom: 10,
+          left: 90,
+          child: Column(
+            children: [
               Padding(
-                padding: EdgeInsets.only(
-                  top: 30,
-                ),
+                padding: EdgeInsets.only(top: 20.0),
                 child: isClicked
                     ? SignInButton(
                         Buttons.Google,
