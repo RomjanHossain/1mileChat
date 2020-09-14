@@ -1,6 +1,8 @@
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:flutter/material.dart';
 import 'package:one_mile_chat/Widgets/signInSignUp.dart';
+import 'package:one_mile_chat/screens/homePage.dart';
+import 'package:one_mile_chat/services/auth.dart';
 
 class StartPage extends StatefulWidget {
   static const String id = '/myid';
@@ -9,7 +11,18 @@ class StartPage extends StatefulWidget {
 }
 
 class _StartPageState extends State<StartPage> {
+  AuthServices auth = AuthServices();
   bool isClicked = true;
+  @override
+  void initState() {
+    super.initState();
+    auth.getUser().then((user) {
+      if (user != null) {
+        Navigator.pushNamed(context, MyChatScreen.id);
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Stack(

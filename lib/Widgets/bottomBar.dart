@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 
-// ignore: camel_case_types
-class bottomBar extends StatelessWidget {
-  const bottomBar({
-    Key key,
-  }) : super(key: key);
+// ignore: must_be_immutable
+class BottomBar extends StatefulWidget {
+  @override
+  _BottomBarState createState() => _BottomBarState();
+}
 
+class _BottomBarState extends State<BottomBar> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -29,17 +30,26 @@ class bottomBar extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          Icon(
-            Icons.message,
-            color: Colors.blue,
+          IconButton(
+            onPressed: null,
+            icon: Icon(
+              Icons.message,
+              color: Colors.blue,
+            ),
           ),
-          Icon(
-            Icons.notifications,
-            color: Colors.black,
+          IconButton(
+            onPressed: null,
+            icon: Icon(
+              Icons.notifications,
+              color: Colors.black,
+            ),
           ),
-          Icon(
-            Icons.person,
-            color: Colors.black,
+          IconButton(
+            onPressed: null,
+            icon: Icon(
+              Icons.person,
+              color: Colors.black,
+            ),
           ),
         ],
       ),

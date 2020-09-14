@@ -2,21 +2,30 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:one_mile_chat/Widgets/bottomBar.dart';
-import 'package:one_mile_chat/Widgets/searchBar.dart';
-import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-import 'package:one_mile_chat/screens/chats.dart';
+
+import 'package:one_mile_chat/Widgets/chatLists.dart';
+
+import 'package:one_mile_chat/screens/StartPage.dart';
+import 'package:one_mile_chat/screens/profile.dart';
 
 import '../consts.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class MyChatScreen extends StatefulWidget {
   static const String id = 'chatScreen';
+
   @override
   _MyChatScreenState createState() => _MyChatScreenState();
 }
 
 class _MyChatScreenState extends State<MyChatScreen> {
   final _auth = FirebaseAuth.instance;
+  int currentIndex = 0;
+  final _pageOptions = [
+    ChatLists(),
+    ChatLists(),
+    ProfilePage(),
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,47 +60,17 @@ class _MyChatScreenState extends State<MyChatScreen> {
             child: GestureDetector(
               onTap: () async {
                 await _auth.signOut();
-                Navigator.pop(context);
+                Navigator.of(context)
+                    .pushNamedAndRemoveUntil(StartPage.id, (route) => false);
               },
               child: FaIcon(
-                FontAwesomeIcons.cog,
+                FontAwesomeIcons.signOutAlt,
               ),
             ),
           ),
         ],
       ),
-      body: SafeArea(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: 20,
-              ),
-              child: searchBar(),
-            ),
-            Expanded(
-              child: AnimationLimiter(
-                child: ListView.builder(
-                  itemCount: 100,
-                  itemBuilder: (BuildContext context, int index) {
-                    return AnimationConfiguration.staggeredList(
-                      position: index,
-                      duration: Duration(milliseconds: 375),
-                      child: SlideAnimation(
-                        verticalOffset: 50.0,
-                        child: FadeInAnimation(
-                          child: CardLists(),
-                        ),
-                      ),
-                    );
-                  },
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
+      body: _pageOptions[currentIndex],
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.white,
         onPressed: () {
@@ -102,43 +81,7 @@ class _MyChatScreenState extends State<MyChatScreen> {
           color: Colors.blue,
         ),
       ),
-      bottomNavigationBar: bottomBar(),
-    );
-  }
-}
-
-class CardLists extends StatelessWidget {
-  const CardLists({
-    Key key,
-  }) : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        Navigator.pushNamed(context, ChatScreen.id);
-      },
-      child: Card(
-        margin: EdgeInsets.symmetric(
-          vertical: 10,
-          horizontal: 2,
-        ),
-        // color: Colors.pinkAccent,
-        elevation: 3,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
-        child: ListTile(
-          leading: CircleAvatar(
-            backgroundImage: AssetImage('images/rick.png'),
-            radius: 30,
-          ),
-          title: Text('Erick Cartman',
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w500,
-              )),
-          subtitle: Text('screw you guys, I\'m goin home'),
-          trailing: Text('4:20 PM'),
-        ),
-      ),
+      bottomNavigationBar: BottomBar(),
     );
   }
 }

@@ -106,20 +106,20 @@ class _SignInState extends State<SignIn> {
               padding: EdgeInsets.only(top: 16),
               focusColor: Colors.red,
               onPressed: () async {
-                if (_formKey.currentState.validate()) {
-                  _formKey.currentState.save();
+                // if (_formKey.currentState.validate()) {
+                //   _formKey.currentState.save();
 
-                  try {
-                    final oldUser = await _auth.signInWithEmailAndPassword(
-                        email: email, password: password);
+                //   try {
+                //     final oldUser = await _auth.signInWithEmailAndPassword(
+                //         email: email, password: password);
 
-                    if (oldUser != null) {
-                      Navigator.pushNamed(context, MyChatScreen.id);
-                    }
-                  } catch (e) {
-                    print(e);
-                  }
-                }
+                //     if (oldUser != null) {
+                Navigator.pushNamed(context, MyChatScreen.id);
+                //   }
+                // } catch (e) {
+                //   print(e);
+                // }
+                // }
               },
               child: Text(
                 'Sign In',

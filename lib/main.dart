@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:one_mile_chat/screens/chats.dart';
 import 'package:one_mile_chat/screens/homePage.dart';
+import 'package:one_mile_chat/screens/profile.dart';
 import 'package:one_mile_chat/services/auth.dart';
 import 'package:provider/provider.dart';
 
@@ -43,6 +44,7 @@ class _MyAppState extends State<MyApp> {
           StartPage.id: (context) => StartPage(),
           MyChatScreen.id: (context) => MyChatScreen(),
           ChatScreen.id: (context) => ChatScreen(),
+          ProfilePage.id: (context) => ProfilePage(),
         },
       ),
     );
