@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:one_mile_chat/Widgets/bottomBar.dart';
+// import 'package:one_mile_chat/Widgets/bottomBar.dart';
+import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 
 import 'package:one_mile_chat/Widgets/chatLists.dart';
 
@@ -21,6 +22,11 @@ class MyChatScreen extends StatefulWidget {
 class _MyChatScreenState extends State<MyChatScreen> {
   final _auth = FirebaseAuth.instance;
   int currentIndex = 0;
+  final _appbarText = [
+    'Chats',
+    'Notifications',
+    'Profile',
+  ];
   final _pageOptions = [
     ChatLists(),
     ChatLists(),
@@ -38,7 +44,7 @@ class _MyChatScreenState extends State<MyChatScreen> {
           color: Colors.transparent,
         ),
         title: Text(
-          'Chats',
+          '${_appbarText[currentIndex]}',
           style: kappbarText,
         ),
         centerTitle: true,
@@ -81,7 +87,22 @@ class _MyChatScreenState extends State<MyChatScreen> {
           color: Colors.blue,
         ),
       ),
-      bottomNavigationBar: BottomBar(),
+
+      bottomNavigationBar: AnimatedBottomNavigationBar(
+        splashColor: Colors.white,
+        splashRadius: 350,
+        icons: [
+          Icons.ac_unit,
+          Icons.print_outlined,
+          Icons.ac_unit_rounded,
+        ],
+        backgroundColor: Colors.red,
+        leftCornerRadius: 20,
+        rightCornerRadius: 20,
+        activeIndex: currentIndex,
+        onTap: (index) => setState(() => currentIndex = index),
+      ),
+      // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
 }

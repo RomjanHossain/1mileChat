@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
-class BottomBar extends StatefulWidget {
-  @override
-  _BottomBarState createState() => _BottomBarState();
-}
+// class BottomBar extends StatefulWidget {
+//   @override
+//   _BottomBarState createState() => _BottomBarState();
+// }
 
-class _BottomBarState extends State<BottomBar> {
+// class _BottomBarState extends State<BottomBar> {
+//   @override
+//   Widget build(BuildContext context) {
+//     return BottomBar();
+//   }
+// }
+
+class BottomBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -34,7 +41,7 @@ class _BottomBarState extends State<BottomBar> {
             onPressed: null,
             icon: Icon(
               Icons.message,
-              color: Colors.blue,
+              color: Colors.black,
             ),
           ),
           IconButton(

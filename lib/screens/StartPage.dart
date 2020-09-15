@@ -35,7 +35,6 @@ class _StartPageState extends State<StartPage> {
         ),
         Scaffold(
           backgroundColor: Colors.transparent,
-
           // resizeToAvoidBottomPadding: false,
           // resizeToAvoidBottomInset: false,
           body: SafeArea(
