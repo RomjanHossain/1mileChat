@@ -22,7 +22,7 @@ class ProfilePage extends StatelessWidget {
               color: Colors.white,
               borderRadius: BorderRadius.all(Radius.circular(20)),
             ),
-            height: MediaQuery.of(context).size.height / 1.9,
+            height: MediaQuery.of(context).size.height / 1.8,
             width: MediaQuery.of(context).size.width,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -30,7 +30,7 @@ class ProfilePage extends StatelessWidget {
               children: [
                 CircleAvatar(
                   backgroundImage: AssetImage('images/rick.png'),
-                  radius: 60,
+                  radius: 70,
                 ),
                 ListTile(
                   title: Center(
