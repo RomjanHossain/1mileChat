@@ -48,10 +48,6 @@ class ProfilePage extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    // Text('data'),
-                    // Text('data'),
-                    // Text('data'),
-                    // Text('data'),
                     SizedBox(
                       width: 100,
                       // height: 50,
@@ -113,30 +109,25 @@ class ProfilePage extends StatelessWidget {
           child: ListView(
             padding: EdgeInsets.all(10),
             children: [
-              Container(
-                height: 50,
-                color: Colors.amber,
-                child: Center(child: Text('Entry ')),
+              ListTile(
+                title: Text('99 Meadow City'),
+                subtitle: Text('Address'),
               ),
-              Container(
-                height: 50,
-                color: Colors.amber,
-                child: Center(child: Text('Entry ')),
+              ListTile(
+                title: Text('1216'),
+                subtitle: Text('Zip Code'),
               ),
-              Container(
-                height: 50,
-                color: Colors.amber,
-                child: Center(child: Text('Entry ')),
+              ListTile(
+                title: Text('Dhaka'),
+                subtitle: Text('City'),
               ),
-              Container(
-                height: 50,
-                color: Colors.amber,
-                child: Center(child: Text('Entry ')),
+              ListTile(
+                title: Text('Bangladesh'),
+                subtitle: Text('Country'),
               ),
-              Container(
-                height: 50,
-                color: Colors.amber,
-                child: Center(child: Text('hfjskad ')),
+              ListTile(
+                title: Text('99 Meadow City'),
+                subtitle: Text('Address'),
               ),
             ],
           ),
