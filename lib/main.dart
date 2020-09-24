@@ -1,13 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:one_mile_chat/screens/chats.dart';
-import 'package:one_mile_chat/screens/homePage.dart';
-import 'package:one_mile_chat/screens/profile.dart';
+import 'package:one_mile_chat/screens/chatLists/chats.dart';
+import 'package:one_mile_chat/screens/MyinitialPage.dart';
+import 'package:one_mile_chat/screens/profilePage/profile.dart';
 import 'package:one_mile_chat/services/auth.dart';
 import 'package:provider/provider.dart';
 
-import 'screens/StartPage.dart';
+import 'screens/signUpPage/StartPage.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
