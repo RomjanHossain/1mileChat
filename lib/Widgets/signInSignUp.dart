@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:one_mile_chat/screens/homePage.dart';
+import 'package:one_mile_chat/screens/MyinitialPage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../consts.dart';
 
@@ -9,7 +9,6 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
-  final _auth = FirebaseAuth.instance;
   final _formKey = GlobalKey<FormState>();
 
   String email;
@@ -114,7 +113,7 @@ class _SignInState extends State<SignIn> {
                 //         email: email, password: password);
 
                 //     if (oldUser != null) {
-                Navigator.pushNamed(context, MyChatScreen.id);
+                // Navigator.pushNamed(context, MyChatScreen.id);
                 //   }
                 // } catch (e) {
                 //   print(e);

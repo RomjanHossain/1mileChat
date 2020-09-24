@@ -34,3 +34,10 @@ const kappbarText = TextStyle(
   fontWeight: FontWeight.w300,
   color: Colors.black,
 );
+
+const kcardBoxShadow = BoxShadow(
+  color: Colors.blueGrey,
+  offset: Offset(0, 10),
+  blurRadius: 10,
+  // spreadRadius: 40.0,
+);
