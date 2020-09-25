@@ -6,6 +6,7 @@ class AuthServices {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _db = FirebaseFirestore.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
+  final DateTime timeCreated = DateTime.now();
 
   Future<User> getUser() async {
     return _auth.currentUser;
@@ -27,7 +28,7 @@ class AuthServices {
       );
       UserCredential userCredential =
           await _auth.signInWithCredential(credential);
-      updateUserData(userCredential.user);
+      createUserData(userCredential.user);
       return userCredential.user;
     } catch (e) {
       print('You got some error \n${e.toString()}');
@@ -35,12 +36,19 @@ class AuthServices {
     }
   }
 
-  Future<void> updateUserData(User user) {
-    DocumentReference reportRef = _db.collection('reports').doc(user.uid);
+  Future<void> createUserData(User user) {
+    DocumentReference reportRef = _db.collection('Users').doc(user.uid);
     return reportRef.set(
       {
         'uid': user.uid,
-        'lastActivity': DateTime.now(),
+        'email': user.email,
+        'friendsCount': 0,
+        'isAdmin': false,
+        'postCount': 0,
+        'userName': user.displayName,
+        'bio': '',
+        'created': timeCreated,
+        'lastActive': DateTime.now(),
       },
     );
   }

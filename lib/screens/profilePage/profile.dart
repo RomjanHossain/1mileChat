@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:one_mile_chat/consts.dart';
+import 'package:one_mile_chat/services/curd.dart';
 import 'package:provider/provider.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -84,7 +85,10 @@ class ProfilePage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     FloatingActionButton(
-                      onPressed: null,
+                      onPressed: () async {
+                        // CurdServide().createUserData(user);
+                        CurdServide().updateUserData(user);
+                      },
                       child: Icon(Icons.mail),
                       backgroundColor: Colors.indigoAccent,
                     ),
