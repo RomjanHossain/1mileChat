@@ -5,6 +5,7 @@ class User {
   final bool isAdmin;
   final String userName;
   final String uid;
+  final String profilePic;
   User({
     this.bio,
     this.email,
@@ -12,5 +13,6 @@ class User {
     this.isAdmin = false,
     this.uid,
     this.userName,
+    this.profilePic,
   });
 }
